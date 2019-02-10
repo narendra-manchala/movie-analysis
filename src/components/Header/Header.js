@@ -10,7 +10,7 @@ import LightBulbIcon from '../LightBulbIcon';
 const styles = createStyles({
   titleRoot: {
     flex: 1,
-    color: 'black'
+    color: 'white'
   }
 });
 
@@ -25,7 +25,7 @@ const Header = props => {
         </Typography>
         <Tooltip title="Toggle light/dark theme">
           <IconButton color="inherit" onClick={onClick}>
-            <LightBulbIcon filled={darkTheme} />
+            <LightBulbIcon filled={!darkTheme} />
           </IconButton>
         </Tooltip>
       </Toolbar>

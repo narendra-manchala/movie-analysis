@@ -46,7 +46,10 @@ const styles = theme => ({
 });
 
 class MovieItem extends React.Component {
-  state = { expanded: false };
+  state = {
+    expanded: false,
+    fav: false
+   };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -98,8 +101,8 @@ class MovieItem extends React.Component {
 
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
+        <IconButton aria-label="Add to favorites" onClick={() => this.setState({fav: !this.state.fav})}>
+            <FavoriteIcon color={this.state.fav ? 'secondary': 'default'} />
           </IconButton>
           <IconButton aria-label="Share">
             <ShareIcon />

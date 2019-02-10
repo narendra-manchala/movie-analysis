@@ -16,14 +16,18 @@ import {
 import Axios from 'axios';
 
 import { MOVIE_DATA_URL } from "../../urls";
+import MOVIE_DATA from "../../data";
 import Header from '../Header/Header';
 import MovieBrowse from '../MovieBrowse/MovieBrowse'
+import sortBy from 'lodash/sortBy'
 
 
 const muiTheme = {
   light: createMuiTheme({
     palette: {
-      primary: 'darkblue',
+      primary: {
+        main: '#002054'
+      },
       type: 'light'
     },
     typography: {
@@ -32,7 +36,9 @@ const muiTheme = {
   }),
   dark: createMuiTheme({
     palette: {
-      primary: 'darkblue',
+      primary: {
+        main: '#002054'
+      },
       type: 'dark'
     },
     typography: {
@@ -47,13 +53,15 @@ const styles = (theme) => ({})
 class App extends Component {
 
   state = {
-    isDarkTheme: true,
+    isDarkTheme: false,
     movieData: null
   }
 
   componentDidMount() {
-    Axios.get(MOVIE_DATA_URL)
-      .then(res => this.setState({ movieData: res.data }, () => console.log(res)))
+    // CORS -- error while fetching data so commented it out
+    // Axios.get(MOVIE_DATA_URL)
+    //   .then(res => this.setState({ movieData: res.data }, () => console.log(res)))
+    this.setState({movieData: MOVIE_DATA})
   }
 
   handleToggleTheme = () => {
@@ -62,6 +70,19 @@ class App extends Component {
     });
   };
 
+  sortValue = value => {
+    let movieData = this.state.movieData
+
+    if (value === 'az') {
+      let sortedObj = sortBy(movieData, 'movie_title')
+      this.setState({movieData: sortedObj})
+    }
+    if (value === 'za') {
+      let sortedObj = sortBy(movieData, 'movie_title')
+      this.setState({movieData: sortedObj.reverse()})
+    }
+  }
+
   render() {
     const { isDarkTheme, movieData } = this.state
     return (
@@ -69,7 +90,7 @@ class App extends Component {
         <CssBaseline />
         <Header darkTheme={isDarkTheme} onClick={this.handleToggleTheme} />
         {
-          movieData && <MovieBrowse movieData={movieData} />
+          movieData && <MovieBrowse movieData={movieData} getSortValue={this.sortValue} />
         }
       </MuiThemeProvider>
     );

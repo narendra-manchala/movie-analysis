@@ -46,20 +46,43 @@ const sortOptions = [
   {
     label: 'Z-A',
     value: 'za'
-  }
+  },
 ]
+
+const selectStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    borderBottom: '1px dotted pink',
+    color: state.isSelected ? 'red' : 'blue',
+    padding: 20,
+  }),
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    width: 100,
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
+  }
+}
 
 class MovieGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       offset: 0,
-      gridView: true
+      gridView: true,
     };
   }
 
   handleClick(offset) {
     this.setState({ offset });
+  }
+
+  handleChange = value => {
+    this.props.getSortValue(value.value)
   }
 
   render() {
@@ -79,6 +102,14 @@ class MovieGrid extends React.Component {
                 : <GridOnOutlined />
             }
           </Button>
+          <div style={{width: '100px', margin: '0 10px'}}>
+          <ReactSelect
+            placeholder='SORT'
+            options={sortOptions}
+            onChange={this.handleChange}
+          />
+          </div>
+
         </div>
         <ScrollToTop>
           {
@@ -118,7 +149,7 @@ class MovieGrid extends React.Component {
             size='large'
           />
         </div>
-        </Paper>
+      </Paper>
     );
   }
 }
