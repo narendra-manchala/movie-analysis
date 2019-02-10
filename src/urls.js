@@ -1,0 +1,1 @@
+export const MOVIE_DATA_URL = "http://starlord.hackerearth.com/movies"

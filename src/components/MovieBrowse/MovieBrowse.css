@@ -1,0 +1,13 @@
+.movie-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10px 20px
+}
