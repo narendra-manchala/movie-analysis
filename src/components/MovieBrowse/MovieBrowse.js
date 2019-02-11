@@ -119,7 +119,7 @@ class MovieGrid extends React.Component {
                 {
                   movieData.slice(offset, offset + 10).map((movie, index) => (
                     <Grid item xs={12} sm={6} md>
-                      <MovieGridView movie={movie} key={index} />
+                      <MovieGridView movie={movie} key={movie.movie_title} />
                     </Grid>
                   ))
                 }
@@ -127,7 +127,7 @@ class MovieGrid extends React.Component {
               : <div className='movie-list'>
                 {
                   movieData.slice(offset, offset + 10).map((movie, index) => (
-                    <MovieListView movie={movie} key={index} />
+                    <MovieListView movie={movie} key={movie.movie_title} />
 
                   ))
                 }
