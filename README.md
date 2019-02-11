@@ -1,4 +1,7 @@
 https://github.com/narendra67/movie-analysis
+
+Visit [DEMO](https://narendra67.github.io/movie-analysis) page
+
 ## Available Scripts
 
 ### `npm install`
