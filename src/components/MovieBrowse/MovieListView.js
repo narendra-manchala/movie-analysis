@@ -156,7 +156,7 @@ class MovieItem extends React.Component {
               {movie.plot_keywords.split('|').join(', ')}
             </Typography>
             <Tooltip title='Goto IMDb'>
-              <a src={movie.movie_imdb_link} target='_blank'>
+              <a href={movie.movie_imdb_link} target='_blank'>
                 <img src='/IMDb-icon.png' width='50px' />
               </a>
             </Tooltip>
